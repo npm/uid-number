@@ -8,7 +8,6 @@ module.exports = uidNumber
 
 var child_process = require("child_process")
   , path = require("path")
-  , npm = require("../npm.js")
   , uidSupport = process.getuid && process.setuid
   , uidCache = {}
   , gidCache = {}
