@@ -29,23 +29,26 @@ function uidNumber (uid, gid, cb) {
   }
 
   var getter = require.resolve("./get-uid-gid.js")
-  child_process.exec( process.execPath
-                    , [getter, uid, gid]
-                    , { env: process.env
-                      , uid: process.getuid()
-                      , gid: process.getgid() }
-                    , function (code, out, err) {
+
+  child_process.execFile( process.execPath
+                        , [getter, uid, gid]
+                        , function (code, out, err) {
     if (er) return cb(new Error("could not get uid/gid\n" + err))
-    out = JSON.parse(out+"")
+    try {
+      out = JSON.parse(out+"")
+    } catch (ex) {
+      return cb(ex)
+    }
+
     if (out.error) {
       var er = new Error(out.error)
       er.errno = out.errno
       return cb(er)
     }
+
     if (isNaN(out.uid) || isNaN(out.gid)) return cb(new Error(
       "Could not get uid/gid: "+JSON.stringify(out)))
-    uidCache[uid] = out.uid
-    uidCache[gid] = out.gid
-    cb(null, out.uid, out.gid)
+
+    cb(null, uidCache[uid] = +out.uid, uidCache[gid] = +out.gid)
   })
 }
