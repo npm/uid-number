@@ -25,7 +25,7 @@ function uidNumber (uid, gid, cb) {
   if (gidCache.hasOwnProperty(gid)) gid = gidCache[gid]
 
   if (typeof gid === "number" && typeof uid === "number") {
-    return process.nextTick(cb.bind(null, uid, gid))
+    return process.nextTick(cb.bind(null, null, uid, gid))
   }
 
   var getter = require.resolve("./get-uid-gid.js")
