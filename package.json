@@ -14,5 +14,5 @@
   "engines": {
     "node": "*"
   },
-  "license": "BSD"
+  "license": "ISC"
 }
