@@ -5,7 +5,7 @@
   "version": "0.0.6",
   "repository": {
     "type": "git",
-    "url": "git://github.com/isaacs/uid-number.git"
+    "url": "https://github.com/npm/uid-number.git"
   },
   "main": "uid-number.js",
   "dependencies": {},
